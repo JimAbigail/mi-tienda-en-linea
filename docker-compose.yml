@@ -22,13 +22,14 @@ services:
       - backend
     environment:
       - DB_HOST=pedidos_db
+      - DB_PASSWORD_FILE=/run/secrets/db_password
 
   pedidos_db:
     image: mysql:latest
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_password
       - MYSQL_DATABASE=pedidos
 
   pagos:
@@ -39,13 +40,14 @@ services:
       - "3001:3001"
     environment:
       - DB_HOST=pagos_db
+      - DB_PASSWORD_FILE=/run/secrets/db_password
 
   pagos_db:
     image: mysql:latest
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_password
       - MYSQL_DATABASE=pagos
 
   inventarios:
@@ -56,13 +58,14 @@ services:
       - "3002:3002"
     environment:
       - DB_HOST=inventarios_db
+      - DB_PASSWORD_FILE=/run/secrets/db_password
 
   inventarios_db:
     image: mysql:latest
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_password
       - MYSQL_DATABASE=inventarios
 
   clientes:
@@ -73,13 +76,14 @@ services:
       - "3003:3003"
     environment:
       - DB_HOST=clientes_db
+      - DB_PASSWORD_FILE=/run/secrets/db_password
 
   clientes_db:
     image: mysql:latest
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_password
       - MYSQL_DATABASE=clientes
 
   prometheus:
@@ -94,17 +98,20 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
-      - "3000:3000"
+      - "3004:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
     networks:
       - monitoring
 
-  
 networks:
   frontend:
   backend:
   monitoring:
-  
+
 volumes:
   grafana-storage:
+  prometheus-data:
+secrets:
+  db_password:
+    file: ./db_password.txt
