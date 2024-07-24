@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: username/mi-tienda-en-linea:latest
+        tags: JimAbigail/PROYECTO1:latest
