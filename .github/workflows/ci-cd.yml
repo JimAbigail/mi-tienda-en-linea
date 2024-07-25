@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: Abigail99/mi-tienda-en-linea:latest
+        tags: JimAbigail/mi-tienda-en-linea:latest
