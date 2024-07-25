@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: JimAbigail/PROYECTO1:latest
+        tags: Abigail99/PROYECTO1:latest
